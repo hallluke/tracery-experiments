@@ -1,7 +1,161 @@
 <!doctype html>
-<html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1"><meta name="theme-color" content="#e9eae8"><meta name="description" content="Generative Experiments: small language machines powered by Tracery."><title>Generative Experiments — Luke Hall</title><link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin><link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700&family=Manrope:wght@400;500;600;700;800&display=swap" rel="stylesheet"><link rel="stylesheet" href="style.css"><script defer src="core/utils.js"></script><script defer src="experiments/cumberbot9000.js"></script><script defer src="experiments/ghost-echoes.js"></script><script defer src="core/app.js"></script></head>
-<body><main class="diptych">
-<aside class="context" aria-label="About Generative Experiments"><div class="context-top"><div class="microline"><span>LANGUAGE SYSTEMS / EXPERIMENTS</span><span class="tracery-mark" id="tracery-mark" aria-hidden="true">{[]}</span></div><h1>Generative<br>Experiments<span class="orange title-dot">.</span></h1><p class="tagline">A collection of generative text experiments: little systems that combine words, rules and randomness to make unexpected things. Some began life as bots posting to social media; now they live here, where you can run them yourself, explore their possibilities and find your own favourites.</p><div class="context-selector"><div class="selector-row"><label for="grammar-select">SELECT EXPERIMENT</label><select id="grammar-select" aria-describedby="grammar-description"></select></div></div><section class="grammar-system" aria-labelledby="system-title"><h2 id="system-title" class="micro">ACTIVE GRAMMAR</h2><p id="system-origin" class="rule-name">#origin#</p><p id="system-rule" class="rule-expansion">→ #first# #last#</p><p class="system-note">A set of rules; countless possible combinations.</p></section></div><div class="context-bottom"><p>Created by <a href="https://hallluke.github.io/" target="_blank" rel="noopener noreferrer">Luke Hall ↗</a></p><p>Built with <a href="https://github.com/galaxykate/tracery" target="_blank" rel="noopener noreferrer">Tracery by Kate Compton ↗</a></p></div></aside>
-<div class="workspace"><div class="workspace-inner"><header class="experiment-head"><div class="section-content"><div class="microline"><span id="experiment-counter">EXPERIMENT 001 / 001</span></div><h2 id="grammar-title">Cumberbot9000</h2><p id="grammar-description" class="description"></p><p id="experiment-method" class="method-description"></p><p id="status" class="status" role="status" aria-live="polite"></p></div></header>
-
-<section class="output-section batch-section" aria-labelledby="collection-heading"><div class="section-content"><div class="section-head batch-head"><h3 id="collection-heading">GENERATED OUTPUTS</h3><div class="actions"><label for="quantity">QUANTITY</label><select id="quantity"><option selected>5</option><option>10</option><option>20</option><option>50</option></select><button id="generate-many" type="button" disabled>↻ Regenerate</button></div></div><div id="analysis-legend" class="analysis-legend" hidden></div><ol id="results-list" class="results-list"></ol><div class="collection-footer"><button id="toggle-all" type="button" hidden aria-controls="results-list">Expand all</button><button id="copy-all" type="button" disabled>Copy all ↗</button></div></div></section><footer class="workspace-footer section-content"><span>THE RULES REMAIN. THE RESULTS CHANGE.</span><a href="https://hallluke.github.io/" target="_blank" rel="noopener noreferrer">PORTFOLIO ↗</a></footer></div></div></main></body></html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="theme-color" content="#e9eae8">
+    <meta name="description" content="Generative Experiments: small language machines powered by Tracery.">
+    <title>
+      Generative Experiments — Luke Hall
+    </title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700&family=Manrope:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="style.css">
+    <script defer src="core/utils.js">
+    </script>
+    <script defer src="experiments/cumberbot9000.js">
+    </script>
+    <script defer src="experiments/ghost-echoes.js">
+    </script>
+    <script defer src="core/app.js">
+    </script>
+  </head>
+  <body>
+    <main class="diptych">
+      <aside class="context" aria-label="About Generative Experiments">
+        <div class="context-top">
+          <div class="microline">
+            <span>
+              LANGUAGE SYSTEMS / EXPERIMENTS
+            </span>
+            <span class="tracery-mark" id="tracery-mark" aria-hidden="true">
+              {[]}
+            </span>
+          </div>
+          <h1>
+            Generative
+            <br>
+            Experiments
+            <span class="orange title-dot">
+              .
+            </span>
+          </h1>
+          <p class="tagline">
+            A collection of generative text experiments: little systems that combine words, rules and randomness to make unexpected things. Some began life as bots posting to social media; now they live here, where you can run them yourself, explore their possibilities and find your own favourites.
+          </p>
+          <div class="context-selector">
+            <div class="selector-row">
+              <label for="grammar-select">
+                SELECT EXPERIMENT
+              </label>
+              <select id="grammar-select" aria-describedby="grammar-description">
+              </select>
+            </div>
+          </div>
+          <section class="grammar-system" aria-labelledby="system-title">
+            <h2 id="system-title" class="micro">
+              ACTIVE GRAMMAR
+            </h2>
+            <p id="system-origin" class="rule-name">
+              #origin#
+            </p>
+            <p id="system-rule" class="rule-expansion">
+              → #first# #last#
+            </p>
+            <p class="system-note">
+              A set of rules; countless possible combinations.
+            </p>
+          </section>
+        </div>
+        <div class="context-bottom">
+          <p>
+            Created by
+            <a href="https://hallluke.github.io/" target="_blank" rel="noopener noreferrer">
+              Luke Hall ↗
+            </a>
+          </p>
+          <p>
+            Built with
+            <a href="https://github.com/galaxykate/tracery" target="_blank" rel="noopener noreferrer">
+              Tracery by Kate Compton ↗
+            </a>
+          </p>
+        </div>
+      </aside>
+      <div class="workspace">
+        <div class="workspace-inner">
+          <header class="experiment-head">
+            <div class="section-content">
+              <div class="microline">
+                <span id="experiment-counter">
+                  EXPERIMENT 001 / 001
+                </span>
+              </div>
+              <h2 id="grammar-title">
+                Cumberbot9000
+              </h2>
+              <p id="grammar-description" class="description">
+              </p>
+              <p id="experiment-method" class="method-description">
+              </p>
+              <p id="status" class="status" role="status" aria-live="polite">
+              </p>
+            </div>
+          </header>
+          <section class="output-section batch-section" aria-labelledby="collection-heading">
+            <div class="section-content">
+              <div class="section-head batch-head">
+                <h3 id="collection-heading">
+                  GENERATED OUTPUTS
+                </h3>
+                <div class="actions">
+                  <label for="quantity">
+                    QUANTITY
+                  </label>
+                  <select id="quantity">
+                    <option selected>
+                      5
+                    </option>
+                    <option>
+                      10
+                    </option>
+                    <option>
+                      20
+                    </option>
+                    <option>
+                      50
+                    </option>
+                  </select>
+                  <button id="generate-many" type="button" disabled>
+                    ↻ Regenerate
+                  </button>
+                </div>
+              </div>
+              <div id="analysis-legend" class="analysis-legend" hidden>
+              </div>
+              <ol id="results-list" class="results-list">
+              </ol>
+              <div class="collection-footer">
+                <button id="toggle-all" type="button" hidden aria-controls="results-list">
+                  Expand all
+                </button>
+                <button id="copy-all" type="button" disabled>
+                  Copy all ↗
+                </button>
+              </div>
+            </div>
+          </section>
+          <footer class="workspace-footer section-content">
+            <span>
+              THE RULES REMAIN. THE RESULTS CHANGE.
+            </span>
+            <a href="https://hallluke.github.io/" target="_blank" rel="noopener noreferrer">
+              PORTFOLIO ↗
+            </a>
+          </footer>
+        </div>
+      </div>
+    </main>
+  </body>
+</html>
