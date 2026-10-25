@@ -1,6 +1,17 @@
 (function(){
 const $=id=>document.getElementById(id), selector=$('grammar-select'),results=$('results-list'),status=$('status');
-let current=null, outputs=[];
+let current=null, outputs=[], selectionVersion=0;
+const grammarCache=new Map();
+async function loadGrammar(experiment){
+ if(!grammarCache.has(experiment.grammarURL)){
+  const request=fetch(experiment.grammarURL).then(async response=>{
+   if(!response.ok)throw Error(`HTTP ${response.status} loading ${experiment.grammarURL}`);
+   return response.json();
+  }).catch(error=>{grammarCache.delete(experiment.grammarURL);throw error;});
+  grammarCache.set(experiment.grammarURL,request);
+ }
+ return grammarCache.get(experiment.grammarURL);
+}
 const allButton=$('toggle-all');
 const disclosures=()=>[...results.querySelectorAll('.score-breakdown')].filter(d=>d._disclosureControls);
 function updateAllButton(){
@@ -30,7 +41,22 @@ function render(){
  }results.replaceChildren(fragment);$('copy-all').disabled=false;updateAllButton();status.textContent='';
  }catch(e){status.textContent='Couldn’t generate outputs: '+e.message;console.error(e);}
 }
-function select(id){current=GE.registry.find(x=>x.id===id)||GE.registry[0];selector.value=current.id;
+async function select(id){
+ const version=++selectionVersion;
+ current=GE.registry.find(x=>x.id===id)||GE.registry[0];selector.value=current.id;
+ $('generate-many').disabled=true;$('copy-all').disabled=true;
+ results.replaceChildren();outputs=[];updateAllButton();
+ status.textContent='Loading grammar…';
+ try{
+  const grammar=await loadGrammar(current);
+  if(version!==selectionVersion)return;
+  if(current.grammar!==grammar)current.initialise(grammar);
+ }catch(error){
+  if(version!==selectionVersion)return;
+  status.textContent='Couldn’t load grammar: '+error.message;
+  console.error(error);return;
+ }
+ $('generate-many').disabled=false;
  $('grammar-title').textContent=current.title;$('grammar-description').textContent=current.description;
  const method=$('experiment-method');method.innerHTML=current.methodHTML||'';method.hidden=!current.methodHTML;
  $('system-origin').textContent='#origin#';$('system-rule').textContent=current.example||'→ #origin#';
@@ -45,7 +71,6 @@ for(const x of GE.registry){const o=GE.el('option','',x.label);o.value=x.id;sele
 selector.addEventListener('change',()=>select(selector.value));$('generate-many').addEventListener('click',render);$('quantity').addEventListener('change',render);$('copy-all').addEventListener('click',copy);
 allButton.addEventListener('click',()=>{const items=disclosures();const expand=!items.some(d=>!d.hidden);for(const d of items)GE.setDisclosure(d,expand);updateAllButton();});
 results.addEventListener('ge:disclosurechange',updateAllButton);
-$('generate-many').disabled=false;
 if(new URLSearchParams(location.search).get('preview')==='ghost-flags')$('quantity').value='10';
 select(new URLSearchParams(location.search).get('preview')==='ghost-flags'?'ghost':'benedict');
 })();
