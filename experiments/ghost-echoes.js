@@ -100,9 +100,9 @@ function buildIndex(grammar){
 let index = null;
 // Edition appearances use approved normalised identities, including curated near-matches.
 GE.registry.push({
- id:'ghost',label:'Ghost Echoes',title:'Ghost Echoes',published:'',
- description:'Draw a creative prompt from Brian Eno and Peter Schmidt’s Oblique Strategies, subtitled “Over One Hundred Worthwhile Dilemmas”. Each card offers a fresh way to approach a problem or creative block.',
- methodHTML:'Read more about <a href="https://en.wikipedia.org/wiki/Oblique_Strategies" target="_blank" rel="noopener noreferrer">Oblique Strategies ↗</a>. Word rarity uses inverse document frequency (IDF) across 0 normalised strategies: 1 + ln((1) / (number of strategies containing the word + 1)). Every word on the drawn card contributes to its average rarity. For ranking, each normalised strategy receives the average score of its wording variants. The percentile is the percentage of strategies with an equal or lower reference score (ties share a rank); the score describes vocabulary, not quality.',
+ id:'ghost',label:'Ghost Echoes',title:'Ghost Echoes',published:'2017-03-16',
+ description:'Draw a creative prompt from Brian Eno and Peter Schmidt’s Oblique Strategies. Each card offers a fresh way to approach a problem or creative block.',
+ methodHTML:'Read more about <a href="https://en.wikipedia.org/wiki/Oblique_Strategies" target="_blank" rel="noopener noreferrer">Oblique Strategies ↗</a>. Word rarity uses inverse document frequency (IDF). Every word on the drawn card contributes to its average rarity. For ranking, each normalised strategy receives the average score of its wording variants. The percentile is the percentage of strategies with an equal or lower reference score and ties share a rank.',
  grammarURL:'grammars/ghost-echoes.json',
  initialise(grammar){this.grammar=grammar;index=buildIndex(grammar);this.methodHTML=this.methodHTML.replace(/across \d+ normalised strategies: 1 \+ ln\(\(\d+\)/, 'across '+index.count+' normalised strategies: 1 + ln(('+ (index.count+1) +')');},
  example:'→ #edition_one# / #edition_two# / #edition_three# / #edition_four#',note:'One edition is chosen at random, then one entry from that edition.',
