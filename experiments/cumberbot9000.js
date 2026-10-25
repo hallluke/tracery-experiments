@@ -137,9 +137,9 @@ function scoreChip(result, small = false) {
 }
 
 GE.registry.push({
- id:'benedict', label:'Cumberbot9000', title:'Cumberbot9000', published:'',
+ id:'benedict', label:'Cumberbot9000', title:'Cumberbot9000', published:'2017-03-13',
  description:'Benedict Cumberbatch has one of the most entertaining names in showbusiness. This little machine dreams up alternative versions, from almost believable to completely ridiculous.',
- methodHTML:'Each name is compared with “Benedict Cumberbatch” using <a href="https://en.wikipedia.org/wiki/Jaro%E2%80%93Winkler_distance" target="_blank" rel="noopener noreferrer">Jaro–Winkler similarity ↗</a>. The score looks at shared letters, how closely their positions and order match, and whether the words start alike. First name and surname are scored separately, then averaged. Higher percentages mean closer spelling, not necessarily a better name.',
+ methodHTML:'Each name is compared with “Benedict Cumberbatch” using <a href="https://en.wikipedia.org/wiki/Jaro%E2%80%93Winkler_distance" target="_blank" rel="noopener noreferrer">Jaro–Winkler similarity ↗</a>. The score looks at shared letters, how closely their positions and order match, and whether the words start alike. First name and surname are scored separately, then averaged.',
  grammarURL:'grammars/cumberbot9000.json',
  initialise(grammar){this.grammar=grammar;calculateDistribution(grammar);this.distribution=distribution;},
  example:'→ #first# #last#', note:'A set of rules; countless possible combinations.',
