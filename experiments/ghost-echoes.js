@@ -100,7 +100,7 @@ function buildIndex(grammar){
 let index = null;
 // Edition appearances use approved normalised identities, including curated near-matches.
 GE.registry.push({
- id:'ghost',label:'Ghost Echoes',title:'Ghost Echoes',published:'2017-03-16',
+ id:'ghost-echoes',label:'Ghost Echoes',title:'Ghost Echoes',published:'2017-03-16',
  description:'Draw a creative prompt from Brian Eno and Peter Schmidt’s Oblique Strategies. Each card offers a fresh way to approach a problem or creative block.',
  methodHTML:'Read more about <a href="https://en.wikipedia.org/wiki/Oblique_Strategies" target="_blank" rel="noopener noreferrer">Oblique Strategies ↗</a>. Word rarity uses inverse document frequency (IDF). Every word on the drawn card contributes to its average rarity. For ranking, each normalised strategy receives the average score of its wording variants. The percentile is the percentage of strategies with an equal or lower reference score and ties share a rank.',
  grammarURL:'grammars/ghost-echoes.json',
