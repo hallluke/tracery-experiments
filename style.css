@@ -339,6 +339,41 @@ a:hover, button:hover:not(:disabled) { color: #b9471c; }
 }
 .workspace-footer a { text-decoration: none; }
 
+/* 404 page */
+.error-content {
+  display: flex;
+  min-height: 100dvh;
+  flex-direction: column;
+  justify-content: center;
+  align-items: flex-start;
+  padding-top: 48px;
+  padding-bottom: 48px;
+}
+
+.error-content h2 {
+  margin: 12px 0 22px;
+  font: 600 clamp(80px, 12vw, 160px)/1 'Manrope', sans-serif;
+  letter-spacing: -.08em;
+}
+
+.error-description {
+  max-width: 400px;
+  color: var(--muted);
+  font-size: 15px;
+  line-height: 1.7;
+}
+
+.error-content a {
+  display: inline-block;
+  margin-top: 16px;
+}
+
+@media (max-width: 800px) {
+  .error-content {
+    min-height: 45vh;
+  }
+}
+
 /* 7. Cumberbot9000 — Jaro–Winkler calculation disclosure */
 .breakdown-grid {
   display: grid;
