@@ -84,7 +84,6 @@
     method.hidden=!current.methodHTML;
     $('system-origin').textContent='#origin#';
     $('system-rule').textContent=current.example||'→ #origin#';
-    $('system-rule').classList.toggle('ghost-rule',current.id==='ghost-echoes');
     document.querySelector('.system-note').textContent=current.note||'';
     $('experiment-counter').textContent='EXPERIMENT '+String(GE.registry.indexOf(current)+1).padStart(3,'0')+' / '+String(GE.registry.length).padStart(3,'0');
     const legend=$('analysis-legend');

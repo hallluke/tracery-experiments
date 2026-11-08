@@ -253,7 +253,8 @@ a:hover, button:hover:not(:disabled) { color: #b9471c; }
   overflow-wrap: anywhere;
 }
 .result-name-wrap .result-text {
-  display: inline;
+  display: block;
+  width: 100%;
   margin: 0;
   padding: 0;
   border: 0;
