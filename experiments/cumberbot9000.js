@@ -1,5 +1,5 @@
-/* ============================================================
-   EXPERIMENT METADATA, GENERATION AND DISPLAY — CUMBERBOT
+/* ============================================================ ballsack bawbag blowjobsmith boxofdicks buggery
+   EXPERIMENT METADATA, GENERATION AND DISPLAY — CUMBERBOT      candyass catpiss chickenshit crapfully craptastic
    ============================================================ */
 (function(){
 const {el}=GE;
