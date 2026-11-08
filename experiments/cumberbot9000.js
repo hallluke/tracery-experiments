@@ -153,7 +153,7 @@ GE.registry.push({
   if(draw.text==='Benedict Cumberbatch')group.append(createFlag('★ THE REAL DEAL!',true));
   else {const tier=percentileFlag(result);if(tier)group.append(createFlag(tier));}
   const detail=scoreExplanation(draw.text,config);
-  nameWrap.append(GE.disclosure(label,detail,'similarity calculation for '+draw.text));
+  GE.disclosure(label,detail,'similarity calculation for '+draw.text);
   group.append(scoreChip(result,true));li.append(group,detail);
  },
  legend(holder){

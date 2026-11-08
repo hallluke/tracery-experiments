@@ -9,28 +9,45 @@ GE.expand = (rules, origin='origin') => {
   };
   return expandRule(origin);
 };
-// A disclosure is controlled by its own name and +/- button. Both controls
-// share the same state, and changes notify the collection-level action.
+
+ // A single button controls each result's disclosure.
+ // The final word and +/- indicator stay together when text wraps.
 GE.disclosure = (label, detail, description) => {
-  const toggle=GE.el('button','score-expand','+'); toggle.type='button';
-  const id='ge-detail-'+(GE._detailId=(GE._detailId||0)+1);
-  detail.id=id;
-  detail._disclosureControls={toggle,label,description};
-  toggle.setAttribute('aria-controls',id);
-  label.setAttribute('aria-controls',id);
-  toggle.addEventListener('click',()=>GE.setDisclosure(detail,detail.hidden));
-  label.addEventListener('click',()=>GE.setDisclosure(detail,detail.hidden));
-  GE.setDisclosure(detail,false,false);
-  return toggle;
+  const id = 'ge-detail-' + (GE._detailId = (GE._detailId || 0) + 1);
+  detail.id = id;
+  const text = label.textContent;
+  const match = text.match(/(\S+)$/u);
+  const ending = GE.el('span', 'result-ending');
+  const indicator = GE.el('span', 'score-expand', '+');
+  indicator.setAttribute('aria-hidden', 'true');
+  if (match) {
+    label.textContent = text.slice(0, match.index);
+    ending.append(document.createTextNode(match[1]));
+  } else {
+    label.textContent = '';
+  }
+  ending.append(indicator);
+  label.append(ending);
+  detail._disclosureControls = { label, indicator, description };
+  label.setAttribute('aria-controls', id);
+  label.addEventListener('click', () => GE.setDisclosure(detail, detail.hidden));
+  GE.setDisclosure(detail, false, false);
 };
-GE.setDisclosure=(detail,expanded,notify=true)=>{
-  const controls=detail._disclosureControls;
-  if(!controls)return;
-  detail.hidden=!expanded;
-  const {toggle,label,description}=controls;
-  toggle.textContent=expanded?'−':'+';
-  toggle.setAttribute('aria-expanded',String(expanded));
-  label.setAttribute('aria-expanded',String(expanded));
-  toggle.setAttribute('aria-label',(expanded?'Hide ':'Show ')+description);
-  if(notify)detail.dispatchEvent(new CustomEvent('ge:disclosurechange',{bubbles:true}));
+
+GE.setDisclosure = (detail, expanded, notify = true) => {
+  const controls = detail._disclosureControls;
+  if (!controls) return;
+  detail.hidden = !expanded;
+  const { label, indicator, description } = controls;
+  indicator.textContent = expanded ? '−' : '+';
+  label.setAttribute('aria-expanded', String(expanded));
+  label.setAttribute(
+    'aria-label',
+    (expanded ? 'Hide ' : 'Show ') + description
+  );
+  if (notify) {
+    detail.dispatchEvent(
+      new CustomEvent('ge:disclosurechange', { bubbles: true })
+    );
+  }
 };

@@ -356,6 +356,14 @@ a:hover, button:hover:not(:disabled) { color: #b9471c; }
   letter-spacing: -.08em;
 }
 
+#error-title .orange {
+  display: inline-block;
+  margin-left: 0.18em;
+  font-size: 0.8em;
+  line-height: 0;
+  vertical-align: -0.115em;
+}
+
 .error-description {
   max-width: 400px;
   color: var(--muted);

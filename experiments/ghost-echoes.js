@@ -150,7 +150,7 @@ GE.registry.push({
        row(item.idf/index.maxIDF,item.word+': 1 + ln('+(index.count+1)+' / '+(item.frequency+1)+') = '+item.idf.toFixed(3),item.word+' appears in '+item.frequency+' of '+index.count+' strategies; rarity '+item.idf.toFixed(3));
      }
    }
-   nameWrap.append(GE.disclosure(label,detail,'edition and vocabulary details for '+draw.text));li.append(group,detail);
+   GE.disclosure(label,detail,'edition and vocabulary details for '+draw.text);li.append(group,detail);
  },
  legend(holder){for(const [cls,label] of [['far','Common · bottom third'],['mid','Mixed · middle third'],['close','Rare · top third']]){const item=GE.el('span','legend-item'),swatch=GE.el('span','legend-swatch score-'+cls);item.append(swatch,GE.el('span','',label));holder.append(item);}holder.append(GE.el('span','','Word uniqueness percentile, not card quality'));}
 });
