@@ -126,11 +126,22 @@
   }
   );
   results.addEventListener('ge:disclosurechange',updateAllButton);
-  const requestedGrammar = new URLSearchParams(location.search).get('grammar');
-  const initialGrammar = GE.registry.some(x => x.id === requestedGrammar)
+  const params = new URLSearchParams(window.location.search);
+  const requestedGrammar = params.get('grammar');
+  const validGrammar = GE.registry.some(
+    experiment => experiment.id === requestedGrammar
+  );
+  const initialGrammar = validGrammar
     ? requestedGrammar
-    : 'cumberbot9000';
-
+    : GE.choose(GE.registry).id;
+  // Keep only a valid grammar parameter in the URL.
+  const cleanURL = new URL(window.location.href);
+  cleanURL.search = validGrammar
+    ? `?grammar=${encodeURIComponent(requestedGrammar)}`
+    : '';
+  if (cleanURL.href !== window.location.href) {
+    window.history.replaceState(null, '', cleanURL);
+  }
   select(initialGrammar);
 }
 )();

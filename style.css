@@ -242,11 +242,9 @@ a:hover, button:hover:not(:disabled) { color: #b9471c; }
   color: #929993;
 }
 .results-list > li > .result-name-wrap {
-  display: flex;
+  display: block;
   grid-column: 2;
   grid-row: 1;
-  align-items: center;
-  gap: 7px;
   min-width: 0;
 }
 .result-text {
@@ -298,11 +296,12 @@ a:hover, button:hover:not(:disabled) { color: #b9471c; }
 }
 .result-name-wrap .score-expand {
   display: inline-grid;
+  vertical-align: baseline;
+  margin-left: 7px;
   flex: none;
   place-items: center;
   width: 14px;
   height: 18px;
-  margin: 0;
   padding: 0;
   border: 0;
   background: transparent;

@@ -1,6 +1,9 @@
-/* ============================================================ ballsack bawbag blowjobsmith boxofdicks buggery
-   EXPERIMENT METADATA, GENERATION AND DISPLAY — CUMBERBOT      candyass catpiss chickenshit crapfully craptastic
-   ============================================================ */
+/* ============================================================
+   EXPERIMENT METADATA, GENERATION AND DISPLAY — CUMBERBOT     
+   ============================================================
+   Ideas:
+   - rude flag: ballsack bawbag blowjobsmith boxofdicks buggery candyass catpiss chickenshit crapfully craptastic
+*/
 (function(){
 const {el}=GE;
 const config={ reference:['Benedict','Cumberbatch'], thresholds:[0.50,0.58] };
