@@ -107,12 +107,21 @@
     o.value=x.id;
     selector.append(o);
   }
-  selector.addEventListener('change', () =>  {
+  selector.addEventListener('change', () => {
+    const grammar = selector.value;
     const url = new URL(window.location.href);
-    url.searchParams.set('grammar', selector.value);
+    url.searchParams.set('grammar', grammar);
     window.history.replaceState(null, '', url);
-    select(selector.value);
-  }
+    select(grammar);
+    if (typeof window.goatcounter?.count === 'function') {
+      window.goatcounter.count({
+        path: `grammar-selected-${grammar}`,
+        title: `Grammar selected: ${grammar}`,
+        event: true,
+        no_session: true
+      });
+    }
+  });
   );
   $('generate-many').addEventListener('click', render);
   $('quantity').addEventListener('change', render);
