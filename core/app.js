@@ -122,7 +122,6 @@
       });
     }
   });
-  );
   $('generate-many').addEventListener('click', render);
   $('quantity').addEventListener('change', render);
   $('copy-all').addEventListener('click', copy);
