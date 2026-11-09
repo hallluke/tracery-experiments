@@ -1,15 +1,21 @@
 <!doctype html>
 <html lang="en">
   <head>
-    <meta charset="utf-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1">
-    <meta name="theme-color" content="#e9eae8">
-    <meta name="description" content="Generative Experiments: small language machines powered by Tracery.">
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta name="theme-color" content="#e9eae8" />
+    <meta
+      name="description"
+      content="Generative Experiments: small language machines powered by Tracery."
+    />
     <title>Generative Experiments — Luke Hall</title>
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700&family=Manrope:wght@400;500;600;700;800&display=swap" rel="stylesheet">
-    <link rel="stylesheet" href="style.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700&family=Manrope:wght@400;500;600;700;800&display=swap"
+      rel="stylesheet"
+    />
+    <link rel="stylesheet" href="style.css" />
     <!-- load interactivity -->
     <script defer src="core/utils.js"></script>
     <script defer src="experiments/cumberbot9000.js"></script>
@@ -21,19 +27,17 @@
       window.goatcounter = {
         path: function () {
           const params = new URLSearchParams(window.location.search);
-          const grammar = params.get('grammar');
-          const base = '/repos/generative-experiments/';
-          return grammar
-            ? `${base}?grammar=${encodeURIComponent(grammar)}`
-            : base;
-        }
+          const grammar = params.get("grammar");
+          const base = "/repos/generative-experiments/";
+          return grammar ? `${base}?grammar=${encodeURIComponent(grammar)}` : base;
+        },
       };
     </script>
     <script
       data-goatcounter="https://lukehall.goatcounter.com/count"
       async
-      src="https://gc.zgo.at/count.js">
-    </script>
+      src="https://gc.zgo.at/count.js"
+    ></script>
   </head>
   <body>
     <main class="diptych">
@@ -43,36 +47,42 @@
             <span>LANGUAGE SYSTEMS / EXPERIMENTS</span>
             <span class="tracery-mark" id="tracery-mark" aria-hidden="true">{[]}</span>
           </div>
-          <h1>Generative<br>Experiments
+          <h1>
+            Generative<br />Experiments
             <span class="orange title-dot">.</span>
           </h1>
-          <p class="tagline">A collection of generative text experiments: little systems that combine words, rules and randomness to make unexpected things. Some began life as bots posting to social media; now they live here, where you can run them yourself, explore their possibilities and find your own favourites.</p>
+          <p class="tagline">
+            A collection of generative text experiments: little systems that combine words, rules
+            and randomness to make unexpected things. Some began life as bots posting to social
+            media; now they live here, where you can run them yourself, explore their possibilities
+            and find your own favourites.
+          </p>
           <div class="context-selector">
             <div class="selector-row">
-              <label for="grammar-select">
-                SELECT EXPERIMENT
-              </label>
-              <select id="grammar-select" aria-describedby="grammar-description">
-              </select>
+              <label for="grammar-select"> SELECT EXPERIMENT </label>
+              <select id="grammar-select" aria-describedby="grammar-description"></select>
             </div>
           </div>
           <section class="grammar-system" aria-labelledby="system-title">
-            <h2 id="system-title" class="micro">
-              ACTIVE GRAMMAR
-            </h2>
-            <p id="system-origin" class="rule-name">
-              #origin#
-            </p>
+            <h2 id="system-title" class="micro">ACTIVE GRAMMAR</h2>
+            <p id="system-origin" class="rule-name">#origin#</p>
             <p id="system-rule" class="rule-expansion"></p>
             <p class="system-note"></p>
           </section>
         </div>
         <div class="context-bottom">
-          <p>Created by
+          <p>
+            Created by
             <a href="https://lukehall.co/" target="_blank" rel="noopener noreferrer">Luke Hall ↗</a>
           </p>
-          <p>Built with
-            <a href="https://github.com/galaxykate/tracery" target="_blank" rel="noopener noreferrer">Tracery by Kate Compton ↗</a>
+          <p>
+            Built with
+            <a
+              href="https://github.com/galaxykate/tracery"
+              target="_blank"
+              rel="noopener noreferrer"
+              >Tracery by Kate Compton ↗</a
+            >
           </p>
         </div>
       </aside>
@@ -81,9 +91,7 @@
           <header class="experiment-head">
             <div class="section-content">
               <div class="microline">
-                <span id="experiment-counter">
-                  EXPERIMENT 001 / 001
-                </span>
+                <span id="experiment-counter"> EXPERIMENT 001 / 001 </span>
               </div>
               <h2 id="grammar-title"></h2>
               <p id="grammar-description" class="description"></p>
@@ -94,50 +102,30 @@
           <section class="output-section batch-section" aria-labelledby="collection-heading">
             <div class="section-content">
               <div class="section-head batch-head">
-                <h3 id="collection-heading">
-                  GENERATED OUTPUTS
-                </h3>
+                <h3 id="collection-heading">GENERATED OUTPUTS</h3>
                 <div class="actions">
-                  <label for="quantity">
-                    QUANTITY
-                  </label>
+                  <label for="quantity"> QUANTITY </label>
                   <select id="quantity">
-                    <option selected>
-                      5
-                    </option>
-                    <option>
-                      10
-                    </option>
-                    <option>
-                      20
-                    </option>
-                    <option>
-                      50
-                    </option>
+                    <option selected>5</option>
+                    <option>10</option>
+                    <option>20</option>
+                    <option>50</option>
                   </select>
-                  <button id="generate-many" type="button" disabled>
-                    ↻ Regenerate
-                  </button>
+                  <button id="generate-many" type="button" disabled>↻ Regenerate</button>
                 </div>
               </div>
-              <div id="analysis-legend" class="analysis-legend" hidden>
-              </div>
-              <ol id="results-list" class="results-list">
-              </ol>
+              <div id="analysis-legend" class="analysis-legend" hidden></div>
+              <ol id="results-list" class="results-list"></ol>
               <div class="collection-footer">
                 <button id="toggle-all" type="button" hidden aria-controls="results-list">
                   Expand all
                 </button>
-                <button id="copy-all" type="button" disabled>
-                  Copy all ↗
-                </button>
+                <button id="copy-all" type="button" disabled>Copy all ↗</button>
               </div>
             </div>
           </section>
           <footer class="workspace-footer section-content">
-            <span>
-              THE RULES REMAIN. THE RESULTS CHANGE.
-            </span>
+            <span> THE RULES REMAIN. THE RESULTS CHANGE. </span>
             <a href="https://lukehall.co/" target="_blank" rel="noopener noreferrer">
               PORTFOLIO ↗
             </a>

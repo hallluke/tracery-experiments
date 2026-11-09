@@ -1,154 +1,159 @@
-(function() {
-  const $=id=>document.getElementById(id), selector=$('grammar-select'),results=$('results-list'),status=$('status');
-  let current=null, outputs=[], selectionVersion=0;
-  const grammarCache=new Map();
+(function () {
+  const $ = (id) => document.getElementById(id),
+    selector = $("grammar-select"),
+    results = $("results-list"),
+    status = $("status");
+  let current = null,
+    outputs = [],
+    selectionVersion = 0;
+  const grammarCache = new Map();
   async function loadGrammar(experiment) {
-    if(!grammarCache.has(experiment.grammarURL)) {
-      const request=fetch(experiment.grammarURL).then(async response=> {
-        if(!response.ok)throw Error(`HTTP ${response.status} loading ${experiment.grammarURL}`);
-        return response.json();
-      }
-      ).catch(error=> {
-        grammarCache.delete(experiment.grammarURL);
-        throw error;
-      }
-      );
-      grammarCache.set(experiment.grammarURL,request);
+    if (!grammarCache.has(experiment.grammarURL)) {
+      const request = fetch(experiment.grammarURL)
+        .then(async (response) => {
+          if (!response.ok) throw Error(`HTTP ${response.status} loading ${experiment.grammarURL}`);
+          return response.json();
+        })
+        .catch((error) => {
+          grammarCache.delete(experiment.grammarURL);
+          throw error;
+        });
+      grammarCache.set(experiment.grammarURL, request);
     }
     return grammarCache.get(experiment.grammarURL);
   }
-  const allButton=$('toggle-all');
-  const disclosures=()=>[...results.querySelectorAll('.score-breakdown')].filter(d=>d._disclosureControls);
+  const allButton = $("toggle-all");
+  const disclosures = () =>
+    [...results.querySelectorAll(".score-breakdown")].filter((d) => d._disclosureControls);
   function updateAllButton() {
-    const items=disclosures();
-    allButton.hidden=!items.length;
-    if(!items.length)return;
+    const items = disclosures();
+    allButton.hidden = !items.length;
+    if (!items.length) return;
     // Prefer collapsing when anything is open; expand only if all are closed.
-    const anyOpen=items.some(d=>!d.hidden);
-    allButton.textContent=anyOpen?'Collapse all':'Expand all';
-    allButton.setAttribute('aria-label',(anyOpen?'Collapse':'Expand')+' all result details');
+    const anyOpen = items.some((d) => !d.hidden);
+    allButton.textContent = anyOpen ? "Collapse all" : "Expand all";
+    allButton.setAttribute("aria-label", (anyOpen ? "Collapse" : "Expand") + " all result details");
   }
   function render() {
-    if(!current)return;
+    if (!current) return;
     try {
-      const count=Number($('quantity').value),fragment=document.createDocumentFragment();
-      outputs=[];
-      for(let i=0;i<count;i++) {
-        const draw=current.draw();
+      const count = Number($("quantity").value),
+        fragment = document.createDocumentFragment();
+      outputs = [];
+      for (let i = 0; i < count; i++) {
+        const draw = current.draw();
         outputs.push(draw.text);
-        const li=GE.el('li'),wrap=GE.el('span','result-name-wrap'),label=GE.el('button','result-text',draw.text);
-        label.type='button';
+        const li = GE.el("li"),
+          wrap = GE.el("span", "result-name-wrap"),
+          label = GE.el("button", "result-text", draw.text);
+        label.type = "button";
         wrap.append(label);
         li.append(wrap);
-        if(current.decorate)current.decorate(draw,label,wrap,li);
-        else  {
-          label.disabled=true;
-          label.classList.add('plain-output');
+        if (current.decorate) current.decorate(draw, label, wrap, li);
+        else {
+          label.disabled = true;
+          label.classList.add("plain-output");
         }
         fragment.append(li);
       }
       results.replaceChildren(fragment);
-      $('copy-all').disabled=false;
+      $("copy-all").disabled = false;
       updateAllButton();
-      status.textContent='';
-    }catch(e) {
-      status.textContent='Couldn’t generate outputs: '+e.message;
+      status.textContent = "";
+    } catch (e) {
+      status.textContent = "Couldn’t generate outputs: " + e.message;
       console.error(e);
     }
   }
   async function select(id) {
-    const version=++selectionVersion;
-    current=GE.registry.find(x=>x.id===id)||GE.registry[0];
-    selector.value=current.id;
-    $('generate-many').disabled=true;
-    $('copy-all').disabled=true;
+    const version = ++selectionVersion;
+    current = GE.registry.find((x) => x.id === id) || GE.registry[0];
+    selector.value = current.id;
+    $("generate-many").disabled = true;
+    $("copy-all").disabled = true;
     results.replaceChildren();
-    outputs=[];
+    outputs = [];
     updateAllButton();
-    status.textContent='Loading grammar…';
+    status.textContent = "Loading grammar…";
     try {
-      const grammar=await loadGrammar(current);
-      if(version!==selectionVersion)return;
-      if(current.grammar!==grammar)current.initialise(grammar);
-    }catch(error) {
-      if(version!==selectionVersion)return;
-      status.textContent='Couldn’t load grammar: '+error.message;
+      const grammar = await loadGrammar(current);
+      if (version !== selectionVersion) return;
+      if (current.grammar !== grammar) current.initialise(grammar);
+    } catch (error) {
+      if (version !== selectionVersion) return;
+      status.textContent = "Couldn’t load grammar: " + error.message;
       console.error(error);
       return;
     }
-    $('generate-many').disabled=false;
-    $('grammar-title').textContent=current.title;
-    $('grammar-description').textContent=current.description;
-    const method=$('experiment-method');
-    method.innerHTML=current.methodHTML||'';
-    method.hidden=!current.methodHTML;
-    $('system-origin').textContent='#origin#';
-    $('system-rule').textContent=current.example||'→ #origin#';
-    document.querySelector('.system-note').textContent=current.note||'';
-    $('experiment-counter').textContent='EXPERIMENT '+String(GE.registry.indexOf(current)+1).padStart(3,'0')+' / '+String(GE.registry.length).padStart(3,'0');
-    const legend=$('analysis-legend');
+    $("generate-many").disabled = false;
+    $("grammar-title").textContent = current.title;
+    $("grammar-description").textContent = current.description;
+    const method = $("experiment-method");
+    method.innerHTML = current.methodHTML || "";
+    method.hidden = !current.methodHTML;
+    $("system-origin").textContent = "#origin#";
+    $("system-rule").textContent = current.example || "→ #origin#";
+    document.querySelector(".system-note").textContent = current.note || "";
+    $("experiment-counter").textContent =
+      "EXPERIMENT " +
+      String(GE.registry.indexOf(current) + 1).padStart(3, "0") +
+      " / " +
+      String(GE.registry.length).padStart(3, "0");
+    const legend = $("analysis-legend");
     legend.replaceChildren();
-    if(current.legend)current.legend(legend);
-    legend.hidden=!current.legend;
+    if (current.legend) current.legend(legend);
+    legend.hidden = !current.legend;
     render();
   }
   async function copy() {
     try {
-      await navigator.clipboard.writeText(outputs.join('\n'));
-      const b=$('copy-all');
-      b.textContent='Copied ✓';
-      setTimeout(()=>b.textContent='Copy all ↗',1400);
-    }catch {
-      status.textContent='Clipboard access was blocked. Try hosting over HTTPS.';
+      await navigator.clipboard.writeText(outputs.join("\n"));
+      const b = $("copy-all");
+      b.textContent = "Copied ✓";
+      setTimeout(() => (b.textContent = "Copy all ↗"), 1400);
+    } catch {
+      status.textContent = "Clipboard access was blocked. Try hosting over HTTPS.";
     }
   }
-  for(const x of GE.registry) {
-    const o=GE.el('option','',x.label);
-    o.value=x.id;
+  for (const x of GE.registry) {
+    const o = GE.el("option", "", x.label);
+    o.value = x.id;
     selector.append(o);
   }
-  selector.addEventListener('change', () => {
+  selector.addEventListener("change", () => {
     const grammar = selector.value;
     const url = new URL(window.location.href);
-    url.searchParams.set('grammar', grammar);
-    window.history.replaceState(null, '', url);
+    url.searchParams.set("grammar", grammar);
+    window.history.replaceState(null, "", url);
     select(grammar);
-    if (typeof window.goatcounter?.count === 'function') {
+    if (typeof window.goatcounter?.count === "function") {
       window.goatcounter.count({
         path: `grammar-selected-${grammar}`,
         title: `Grammar selected: ${grammar}`,
         event: true,
-        no_session: true
+        no_session: true,
       });
     }
   });
-  $('generate-many').addEventListener('click', render);
-  $('quantity').addEventListener('change', render);
-  $('copy-all').addEventListener('click', copy);
-  allButton.addEventListener('click',()=> {
-    const items=disclosures();
-    const expand=!items.some(d=>!d.hidden);
-    for(const d of items)GE.setDisclosure(d,expand);
+  $("generate-many").addEventListener("click", render);
+  $("quantity").addEventListener("change", render);
+  $("copy-all").addEventListener("click", copy);
+  allButton.addEventListener("click", () => {
+    const items = disclosures();
+    const expand = !items.some((d) => !d.hidden);
+    for (const d of items) GE.setDisclosure(d, expand);
     updateAllButton();
-  }
-  );
-  results.addEventListener('ge:disclosurechange',updateAllButton);
+  });
+  results.addEventListener("ge:disclosurechange", updateAllButton);
   const params = new URLSearchParams(window.location.search);
-  const requestedGrammar = params.get('grammar');
-  const validGrammar = GE.registry.some(
-    experiment => experiment.id === requestedGrammar
-  );
-  const initialGrammar = validGrammar
-    ? requestedGrammar
-    : GE.choose(GE.registry).id;
+  const requestedGrammar = params.get("grammar");
+  const validGrammar = GE.registry.some((experiment) => experiment.id === requestedGrammar);
+  const initialGrammar = validGrammar ? requestedGrammar : GE.choose(GE.registry).id;
   // Keep only a valid grammar parameter in the URL.
   const cleanURL = new URL(window.location.href);
-  cleanURL.search = validGrammar
-    ? `?grammar=${encodeURIComponent(requestedGrammar)}`
-    : '';
+  cleanURL.search = validGrammar ? `?grammar=${encodeURIComponent(requestedGrammar)}` : "";
   if (cleanURL.href !== window.location.href) {
-    window.history.replaceState(null, '', cleanURL);
+    window.history.replaceState(null, "", cleanURL);
   }
   select(initialGrammar);
-}
-)();
+})();
