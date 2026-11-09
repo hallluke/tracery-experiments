@@ -16,7 +16,11 @@
     <!-- counter -->
     <script>
       window.goatcounter = {
-        path: "/repos/generative-experiments/404",
+        path: function () {
+          const path = window.location.pathname.split("/").slice(2).join("/");
+          return "/repos/generative-experiments/404/" + path;
+        },
+        title: "404 — Generative Experiments",
       };
     </script>
     <script
